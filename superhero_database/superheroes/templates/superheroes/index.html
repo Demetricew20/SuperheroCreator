@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Superhero Index</title>
+</head>
+<body>
+    <h1>Superheroes</h1>
+    <div>
+        <ul>
+            {% for superhero in all_superheroes   %}
+            <li>
+                <h2>{{superhero}}</h2>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</body>
+</html>
