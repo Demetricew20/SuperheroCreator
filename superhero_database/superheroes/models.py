@@ -9,6 +9,7 @@ class Superhero(models.Model):
     primary_ability = models.CharField(max_length=50)
     secondary_ability = models.CharField(max_length=50)
     catchphrase = models.CharField(max_length=60)
+    hero_image = models.ImageField(upload_to='media/', null=True, blank=True)
 
     def __str__(self):
         return self.hero_name
