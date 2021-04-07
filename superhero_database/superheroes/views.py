@@ -8,7 +8,7 @@ from django.forms import ModelForm
 class SuperheroForm(ModelForm):
     class Meta:
         model = Superhero
-        fields = ['hero_name', 'alter_ego', 'primary_ability', 'secondary_ability', 'catchphrase']
+        fields = ['hero_name', 'alter_ego', 'primary_ability', 'secondary_ability', 'catchphrase', 'hero_image']
 
 
 # Create your views here.
@@ -31,32 +31,32 @@ def detail(request, superhero_id):
 
 
 def create(request):
-    if request.method == 'POST':
-        hero_name = request.POST.get('hero_name')
-        alter_ego = request.POST.get('alter_ego')
-        primary_ability = request.POST.get('primary_ability')
-        secondary_ability = request.POST.get('secondary_ability')
-        catchphrase = request.POST.get('catchphrase')
-        hero_image = request.POST.get('hero_image')
-        new_superhero = Superhero(hero_name=hero_name, alter_ego=alter_ego, primary_ability=primary_ability,
-                                  secondary_ability=secondary_ability, catchphrase=catchphrase)
-        new_superhero.save()
-        return HttpResponseRedirect(reverse('superheroes:index'))
+    form = SuperheroForm(request.POST or None, request.FILES or None)
+
+    context = {
+        'form': form
+    }
+
+    if form.is_valid():
+        form.save()
+        return redirect('superheroes:index')
+
     else:
-        return render(request, 'superheroes/create.html')
+        return render(request, 'superheroes/create.html', context)
 
 
 def edit(request, superhero_id):
     superhero = get_object_or_404(Superhero, pk=superhero_id)
 
-    form = SuperheroForm(request.POST or None, instance=superhero)
+    form = SuperheroForm(request.POST or None, request.FILES or None, instance=superhero)
 
     if form.is_valid():
         form.save()
         return redirect('superheroes:index')
 
     context = {
-        'form': form
+        'form': form,
+        'hero image': superhero
     }
 
     return render(request, 'superheroes/edit.html', context)
