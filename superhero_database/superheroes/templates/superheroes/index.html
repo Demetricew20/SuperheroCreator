@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-        html, body { height: 100%; width: 100%; }
-        .main__title { font-size: 2rem;}
-        .container-fluid { justify-content: space-between; padding-right: 0px; padding-left: 2rem; }
-        .card {max-width: 18rem;}
+        html, body { height: 100vh; width: 100vw; background-color: black;}
+        .main__title { font-size: 2rem; color: white;}
+        .container-fluid { justify-content: space-around; padding-right: 0px; padding-left: 2rem; }
+        .card {max-width: 20rem; margin: .5rem;}
+        .card-img-top { max-height: 20rem; }
+        .card-text, .links{ width: 100%; font-size: .75rem; }
+        .links { justify-content: center; text-align: center; }
 
     </style>
 </head>
@@ -23,18 +26,23 @@
         </div>
 
     </div>
-
-    <a href="{% url 'superheroes:create_superhero' %}">New</a>
     <div class="container-fluid row">
         {% for superhero in all_superheroes %}
         <div class="card ">
             <img class="card-img-top" src="{{superhero.hero_image.url}}" alt="Card image cap">
             <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Name: {{superhero}}<br>Catchphrase: {{superhero.catchphrase}}</p>
+                <div class="links">
+                <a href="{% url 'superheroes:detail' superhero.id %}">view</a>
+                <a href="{% url 'superheroes:edit_superhero' superhero.id %}">edit</a>
+                <a href="{% url 'superheroes:delete_superhero' superhero.id %}">delete</a>
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
+
+    <button><a href="{% url 'superheroes:create_superhero' %}">Create New Superhero!</a></button>
 
 
 
