@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Superhero
-from .forms import InputForm
+from django.forms import ModelForm
+
+class SuperheroForm(ModelForm):
+    class Meta:
+        model = Superhero
+        field = ['name', 'alter_ego', 'primary_ability', 'secondary_ability', 'catchphrase']
 
 
 # Create your views here.
@@ -16,7 +21,7 @@ def index(request):
 
 
 def detail(request, superhero_id):
-    selected_superhero = Superhero.objects.get(pk=superhero_id)
+    selected_superhero = get_object_or_404(Superhero, pk=superhero_id)
     context = {
         'selected_superhero': selected_superhero
     }
@@ -26,7 +31,7 @@ def detail(request, superhero_id):
 
 def create(request):
     if request.method == 'POST':
-        hero_name = request.POST.get('name')
+        hero_name = request.POST.get('hero_name')
         alter_ego = request.POST.get('alter_ego')
         primary_ability = request.POST.get('primary_ability')
         secondary_ability = request.POST.get('secondary_ability')
@@ -39,8 +44,25 @@ def create(request):
         return render(request, 'superheroes/create.html')
 
 
-def edit(request):
+def edit(request, supehero_id):
+    superhero = get_object_or_404(Superhero, pk=supehero_id)
+
+    form = SuperheroForm(request.POST or None, instance=superhero)
+
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+
     context = {
-        'form': InputForm()
+        'form': form
     }
+
     return render(request, 'superheroes/edit.html', context)
+
+
+def delete(request, superhero_id):
+    superhero = get_object_or_404(Superhero, pk=superhero_id)
+    if request.method == 'POST':
+        superhero.delete()
+        return redirect('index')
+    return render(request, 'superhereos/delete.html')
