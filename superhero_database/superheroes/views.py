@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Superhero
 
 
 # Create your views here.
+
 def index(request):
     all_superheroes = Superhero.objects.all()
     context = {

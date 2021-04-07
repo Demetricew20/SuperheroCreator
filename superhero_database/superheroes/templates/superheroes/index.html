@@ -5,17 +5,32 @@
     <title>Superhero Index</title>
 </head>
 <body>
-    <h1>Superheroes</h1>
-    <div>
-        <ul>
-            {% for superhero in all_superheroes   %}
-            <li>
-                <h2><a href="{% url 'superheroes:detail' superhero.id %}">{{superhero}}</a> </h2>
-            </li>
-            {% endfor %}
-        </ul>
+<h1>Superheroes</h1>
 
-    </div>
+<table border="1">
+<thead>
+    <tr>
+    <th>Name</th>
+    <th>Alter Ego</th>
+    <th>View</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for superhero in all_superheroes %}
+    <tr>
+    <td>{{ superhero }}</td>
+    <td>{{ superhero.alter_ego }}</td>
+    <td><a href="{% url 'superheroes:detail' superhero.id %}">view</a></td>
+    <td><a href="">edit</a></td>
+    <td><a href="">delete</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url 'superheroes:create_superhero' %}">New</a>
 
 </body>
 </html>
