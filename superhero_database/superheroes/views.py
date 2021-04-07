@@ -9,3 +9,12 @@ def index(request):
         'all_superheroes': all_superheroes
     }
     return render(request, 'superheroes/index.html', context)
+
+
+def detail(request, superhero_id):
+    selected_superhero = Superhero.object.filter(superhero_id)
+    context = {
+        'selected_superhero': selected_superhero
+    }
+
+    return render(request, 'superheroes/detail.html', context)
