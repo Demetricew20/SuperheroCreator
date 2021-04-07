@@ -4,10 +4,11 @@ from django.urls import reverse
 from .models import Superhero
 from django.forms import ModelForm
 
+
 class SuperheroForm(ModelForm):
     class Meta:
         model = Superhero
-        field = ['name', 'alter_ego', 'primary_ability', 'secondary_ability', 'catchphrase']
+        fields = ['hero_name', 'alter_ego', 'primary_ability', 'secondary_ability', 'catchphrase']
 
 
 # Create your views here.
@@ -44,14 +45,14 @@ def create(request):
         return render(request, 'superheroes/create.html')
 
 
-def edit(request, supehero_id):
-    superhero = get_object_or_404(Superhero, pk=supehero_id)
+def edit(request, superhero_id):
+    superhero = get_object_or_404(Superhero, pk=superhero_id)
 
     form = SuperheroForm(request.POST or None, instance=superhero)
 
     if form.is_valid():
         form.save()
-        return redirect('index')
+        return redirect('superheroes:index')
 
     context = {
         'form': form
@@ -65,4 +66,5 @@ def delete(request, superhero_id):
     if request.method == 'POST':
         superhero.delete()
         return redirect('index')
-    return render(request, 'superhereos/delete.html')
+
+    return render(request, 'superheroes/delete.html')
