@@ -65,6 +65,10 @@ def delete(request, superhero_id):
     superhero = get_object_or_404(Superhero, pk=superhero_id)
     if request.method == 'POST':
         superhero.delete()
-        return redirect('index')
+        return redirect('superheroes:index')
 
-    return render(request, 'superheroes/delete.html')
+    context = {
+        'superhero': superhero
+    }
+
+    return render(request, 'superheroes/delete.html', context)

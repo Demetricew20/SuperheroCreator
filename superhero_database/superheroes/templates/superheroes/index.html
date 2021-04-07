@@ -24,7 +24,7 @@
     <td>{{ superhero.alter_ego }}</td>
     <td><a href="{% url 'superheroes:detail' superhero.id %}">view</a></td>
     <td><a href="{% url 'superheroes:edit_superhero' superhero.id %}">edit</a></td>
-    <td><a href="">delete</a></td>
+    <td><a href="{% url 'superheroes:delete_superhero' superhero.id %}">delete</a></td>
     </tr>
     {% endfor %}
 </tbody>

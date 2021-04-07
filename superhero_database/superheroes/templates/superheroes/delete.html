@@ -5,6 +5,10 @@
     <title>Remove Superhero</title>
 </head>
 <body>
-
+    <h1>Remove Superhero</h1>
+    <form method="post">{% csrf_token %}
+        Are you sure you want to delete <strong>{{ superhero.hero_name }}</strong> ?
+        <input type="submit" value="Submit" />
+    </form>
 </body>
 </html>
