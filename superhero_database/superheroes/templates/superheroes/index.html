@@ -6,30 +6,37 @@
     <title>Superhero Index</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        html, body { height: 100%; width: 100%; }
+        .main__title { font-size: 2rem;}
+        .container-fluid { justify-content: space-between; padding-right: 0px; padding-left: 2rem; }
+        .card {max-width: 18rem;}
+
+    </style>
 </head>
 <body>
-<h1>Superheroes</h1>
-<a href="{% url 'superheroes:create_superhero' %}">New</a>
+    <div class="container title">
+        <div class="row justify-content-center">
+            <div>
+                <h1 class="main__title">Superheroes</h1>
+            </div>
+        </div>
 
-{% for superhero in all_superheroes %}
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{superhero.hero_image.url}}"  alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">{{superhero}}</h5>
-    <p class="card-text">Catchphrase: {{superhero.catchphrase}}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Alter Ego: {{superhero.alter_ego}}</li>
-    <li class="list-group-item">Primary Ability: {{superhero.primary_ability}}</li>
-    <li class="list-group-item">Secondary Ability: {{superhero.secondary_ability}}</li>
-  </ul>
-  <div class="card-body">
-    <a href="{% url 'superheroes:detail' superhero.id %}">view</a>
-    <a href="{% url 'superheroes:edit_superhero' superhero.id %}">edit</a>
-    <a href="{% url 'superheroes:delete_superhero' superhero.id %}">delete</a>
-  </div>
-</div>
-{% endfor %}
+    </div>
+
+    <a href="{% url 'superheroes:create_superhero' %}">New</a>
+    <div class="container-fluid row">
+        {% for superhero in all_superheroes %}
+        <div class="card ">
+            <img class="card-img-top" src="{{superhero.hero_image.url}}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
