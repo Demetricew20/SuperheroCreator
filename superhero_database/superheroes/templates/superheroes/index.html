@@ -10,7 +10,7 @@
         <ul>
             {% for superhero in all_superheroes   %}
             <li>
-                <h2>{{superhero}}</h2>
+                <h2><a href="{% url 'superheroes:detail' superhero.id %}">{{superhero}}</a> </h2>
             </li>
             {% endfor %}
         </ul>

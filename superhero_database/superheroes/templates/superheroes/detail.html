@@ -7,11 +7,15 @@
 <body>
     <div>
         <ul>
-            {% for superhero in selected_superhero %}
             <li>
-                <h2><a href="{% url 'superheroes:detail' superhero.id %}">{{superhero}}</a> </h2>
+                <h2>{{selected_superhero}}</h2>
+                <ul>
+                    <li>Alter Ego: {{selected_superhero.alter_ego}}</li>
+                    <li>Primary Ability: {{selected_superhero.primary_ability}}</li>
+                    <li>Secondary Ability: {{selected_superhero.secondary_ability}}</li>
+                    <li>Catchphrase: {{selected_superhero.catchphrase}}</li>
+                </ul>
             </li>
-            {% endfor %}
         </ul>
     </div>
 
