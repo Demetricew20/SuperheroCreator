@@ -40,5 +40,6 @@ def create(request):
         return render(request, 'superheroes/create.html')
 
 
-def update(request):
-    return render(request, 'superheroes/update.html')
+def edit(request):
+
+    return reverse_lazy('index')
