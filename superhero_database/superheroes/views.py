@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse
 from .models import Superhero
+from .forms import InputForm
 
 
 # Create your views here.
@@ -41,5 +40,7 @@ def create(request):
 
 
 def edit(request):
-
-    return reverse_lazy('index')
+    context = {
+        'form': InputForm()
+    }
+    return render(request, 'superheroes/edit.html', context)
