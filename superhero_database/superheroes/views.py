@@ -37,13 +37,5 @@ def create(request):
         return render(request, 'superheroes/create.html')
 
 
-def update(request, hero_name):
-    hero = Superhero.objects.get(hero_name=hero_name)
-    if request.method == 'POST':
-        hero.hero_name = request.POST.get('name')
-        hero.alter_ego = request.POST.get('alter_ego')
-        hero.primary_ability = request.POST.get('primary_ability')
-        hero.secondary_ability = request.POST.get('secondary_ability')
-        hero.catchphrase = request.POST.get('catchphrase')
-        hero.save()
-    return HttpResponseRedirect(reverse('superheroes:index'))
+def update(request):
+    return render(request, 'superheroes/update.html')
