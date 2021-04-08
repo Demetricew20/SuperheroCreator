@@ -6,22 +6,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Superhero Details</title>
+    <style>
+        html, body { margin-left: 5px;}
+    </style>
 </head>
 <body>
-    <div>
-        <ul>
-            <li>
-                <h2>{{selected_superhero}}</h2>
-                <ul>
-                    <li>Alter Ego: {{selected_superhero.alter_ego}}</li>
-                    <li>Primary Ability: {{selected_superhero.primary_ability}}</li>
-                    <li>Secondary Ability: {{selected_superhero.secondary_ability}}</li>
-                    <li>Catchphrase: {{selected_superhero.catchphrase}}</li>
-                </ul>
-            </li>
-        </ul>
+        <div class="container">
+            <div class="row justify-content-center">
+            <h1 style=" text-align: center;">{{selected_superhero}}</h1>
+            </div>
+            <div class="row justify-content-center align-items-start">
+            <img class="col" src="{{selected_superhero.hero_image.url}}"
+                 style=" min-height: 50vh; max-height: 60vh; max-width: 60%;
+                  background-position: center; transform: scale(1); justify-content: center;">
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-end">
+            <ul style="list-style: none; margin-right: 2rem; font-weight: 800;" >
+                        <li>Alter Ego: {{selected_superhero.alter_ego}}</li>
+                        <li>Primary Ability: {{selected_superhero.primary_ability}}</li>
+                        <li>Secondary Ability: {{selected_superhero.secondary_ability}}</li>
+                        <li>Catchphrase: {{selected_superhero.catchphrase}}</li>
+            </ul>
+        </div>
+    <div style="justify-content: center; text-align: center;">
+    <button>
+        <a style="color: black;" href="{% url 'superheroes:index' %}">Back to home page</a>
+    </button>
     </div>
-    <button><a href="{% url 'superheroes:index' %}">Back to home page</a></button>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
