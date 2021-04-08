@@ -7,18 +7,33 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&family=Racing+Sans+One&display=swap" rel="stylesheet">
     <style>
-        body { background-image: url("https://images.unsplash.com/photo-1587270613304-4cc9ef012b92?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c3VwZXJoZXJvZXN8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
-               background-size: contain;  }
-        .main__title { font-family:'Londrina Solid', cursive;   font-size: 7vmax; letter-spacing: 5px; color: white;
+        body { background-image: url("https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80");
+               background-repeat: no-repeat; background-size: cover; overflow: auto;}
+        .main__title { font-family:'Londrina Solid', cursive;   font-size: 6vmax; letter-spacing: 5px; color: white;
         background: none;
         text-shadow: 2px 2px 0 #bcbcbc, 4px 4px 0 #9c9c9c;}
-        .container-fluid { justify-content: space-around; padding-right: 0px; padding-left: 2rem; }
-        .card {max-width: 20rem; margin: .5rem;}
+        .container-fluid { justify-content: space-around; padding-right: 0px; padding-left: 2rem; overflow: hidden; }
+        .card {border: 5px solid; border-radius: .50rem; max-width: 20rem; margin: .5rem;}
         .card-img-top { max-height: 20rem; }
-        .card-text, .links{ width: 100%; font-size: .75rem; }
-        .links { justify-content: center; text-align: center; }
+        .card-body { background-color: #BEC7C7; justify-content: center; text-align: center; }
+        .card-text {  font-size: 3rem; font-family: 'Racing Sans One', cursive; color: black; }
+        .card-text, .links{ margin: 0; width: 100%; }
+        .links { position: relative; text-align: center; font-size: 1.25rem; }
+        .links > a { color: #000000; }
+        .links > a:hover { color: #E7B44A; }
+
+        .create__hero__btn { display: flex; flex-direction: row; justify-content: center; height: 25vh;}
+
+        .btn__link { margin: 0; padding: 0;
+                    background-image: url('https://image.freepik.com/free-vector/retro-cartoon-red-background-layout-template-typical-comic-book_168129-206.jpg');
+                    background-repeat: no-repeat; border: transparent; border-radius: 40%;  transform: scale(.8); transform: }
+        .btn__link:link { color: #E7B44A; }
+        .btn__link:hover { color: #E7B44A;}
+
+        .btn__name { z-index: 10; position: relative; top:7vh; font-size: 3rem; vertical-align: middle; color: #E7B44A;  }
+
 
     </style>
 </head>
@@ -36,18 +51,22 @@
         <div class="card border-dark">
             <img class="card-img-top" src="{{superhero.hero_image.url}}" alt="Card image cap">
             <div class="card-body">
-                <p class="card-text">Name: {{superhero}}<br>Catchphrase: {{superhero.catchphrase}}</p>
-                <div class="links">
-                <a href="{% url 'superheroes:detail' superhero.id %}">view</a>
-                <a href="{% url 'superheroes:edit_superhero' superhero.id %}">edit</a>
-                <a href="{% url 'superheroes:delete_superhero' superhero.id %}">delete</a>
+                <p class="card-text">{{superhero}}<br>
+                </p><br>
+                <div class="links row justify-content-space-around">
+                <a class="col" href="{% url 'superheroes:detail' superhero.id %}">view</a>
+                <a class="col"  href="{% url 'superheroes:edit_superhero' superhero.id %}">edit</a>
+                <a class='col' href="{% url 'superheroes:delete_superhero' superhero.id %}">delete</a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-
-    <button><a href="{% url 'superheroes:create_superhero' %}">Create New Superhero!</a></button>
+        <div class="create__hero__btn ">
+            <a class="btn__link" href="{% url 'superheroes:create_superhero' %}">
+                <strong class="btn__name">Create Hero</strong>
+            </a>
+        </div>
 
 
 
